@@ -1,0 +1,45 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 50px;
+    row-gap: 50px;
+    justify-content: center;
+}
+
+.card {
+    height: 250px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.beerpic {
+    height: 100px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    height: 40px;
+    width: 180px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.price {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.button {
+    width: 200px;
+}
+
+.wrapbutton {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
