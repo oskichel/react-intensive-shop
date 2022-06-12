@@ -1,0 +1,11 @@
+.counter {
+    display: flex;
+    column-gap: 5px;
+    margin: 5px 0;
+}
+
+.count {
+    width: 20px;
+    display: flex;
+    justify-content: center;
+}

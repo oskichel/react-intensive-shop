@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from "react";
 import st from './BeerCard.module.css';
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import MyButton from "../UI/Button/MyButton";
-import Counter from '../Counter/Counter'
+import Counter from '../Counter/Counter';
 
 const BeerCard = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [beer, setBeer] = useState(null);
 
     useEffect(() => {
-        fetch(`https://api.punkapi.com/v2/beers/${id}`)
-        .then(res => res.json())
-        .then(data => setBeer(data))
-    }, [id]);
+        async function fetchBeer() {
+            try {
+                const {data} = await axios.get('https://api.punkapi.com/v2/beers/' + id);
+                setBeer(data[0]);
+            } catch (error) {
+                alert('Ошибка при получении данных');
+            }
+        }
+        fetchBeer();
+      
+    }, []);
 
 
+    if (!beer) {
+        return 'Идет загрузка...';
+    }
     return (
-        <div>
-            {beer && (
-                <>
-                    <h1>{beer.name}</h1>
-                    <div>{beer.abv}</div>
+        <div className={st.card}>
+            <img src={beer.image_url} className={st.img} alt={'beer'}></img>
+            <div className={st.container}>
+                <h2>{beer.name}</h2>
+                <div className={st.price}>${beer.abv}</div>
+                <div className={st.store}>
                     <Counter/>
                     <MyButton>В корзину</MyButton>
-                </>
-            )}
+                </div>
+                <div></div>
+                <h3>{beer.tagline}</h3>
+                <div>{beer.description}</div>
+            </div>
         </div>
+
+   
     );
 }
 
