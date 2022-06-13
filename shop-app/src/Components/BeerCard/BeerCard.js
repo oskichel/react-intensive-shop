@@ -8,6 +8,7 @@ import Counter from '../Counter/Counter';
 const BeerCard = () => {
     const { id } = useParams();
     const [beer, setBeer] = useState(null);
+    const [available, setAvailable] = useState(false);
 
     useEffect(() => {
         async function fetchBeer() {
@@ -20,7 +21,11 @@ const BeerCard = () => {
         }
         fetchBeer();
       
-    }, []);
+    }, [id]);
+
+    useEffect(() => {
+        id % 2 === 0 ? setAvailable(true) : setAvailable(false);
+      }, [beer]);
 
 
     if (!beer) {
@@ -32,9 +37,15 @@ const BeerCard = () => {
             <div className={st.container}>
                 <h2>{beer.name}</h2>
                 <div className={st.price}>${beer.abv}</div>
-                <div className={st.store}>
-                    <Counter/>
-                    <MyButton>В корзину</MyButton>
+                <div>
+                    {available 
+                    ? 
+                    <div className={st.store}>
+                        <Counter/>
+                        <MyButton>Добавить в корзину</MyButton>
+                    </div>
+                    : 
+                    <div className={st.store}><MyButton disabled>Нет в наличии</MyButton></div>}
                 </div>
                 <div></div>
                 <h3>{beer.tagline}</h3>

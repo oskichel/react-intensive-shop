@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 const BeerList = () => {
 
     const [beers, setBeer] = useState([]);
+    
 
     useEffect(() => {
         axios.get('https://api.punkapi.com/v2/beers')
@@ -18,6 +19,8 @@ const BeerList = () => {
         })
     })
 
+    
+
 
     return (
         <div className={st.list}>
@@ -27,8 +30,16 @@ const BeerList = () => {
                     <img src={beer.image_url} className={st.beerpic} alt={'beer'}></img>
                     <NavLink to={`/${beer.id}`} className={st.name}>{beer.name}</NavLink>
                     <div className={st.price}>${beer.abv}</div>
-                    <div className={st.wrapbutton}><MyButton className={st.button}>Добавить в корзину</MyButton></div>
-                </div>)
+                    <div className={st.wrapbutton}>
+                        {(beer.id % 2 === 0) ? <MyButton className={st.button}>Добавить в корзину</MyButton> 
+                        : <MyButton disabled className={st.button}>Нет в наличии</MyButton>}
+                    </div>
+                </div>
+                
+                
+                
+                
+                )
             }
 
         </div>
