@@ -21,10 +21,10 @@ function Header() {
                 <img src={logo} className={st.header__logo} alt={'logo'}></img>
                 <NavLink to={'/'} className={st.header__menu}>Главная</NavLink>
                 <NavLink to={'/about'} className={st.header__menu}>О магазине</NavLink>
-                <Cart  className={st.header__menu} />
                 
                 {isAuth ?
-                <div>
+                <div className={st.header}>
+                    <Cart  className={st.header__menu} />
                     <div className={st.header__button}>
                         <MyButton onClick={() => {setIsAuth(false); setModal(false)}}>Выйти</MyButton></div>
                 </div>

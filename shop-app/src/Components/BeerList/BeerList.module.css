@@ -13,6 +13,10 @@
     border-radius: 10px;
 }
 
+.card:hover {
+    border: 1px solid #fa6c05;
+}
+
 .beerpic {
     height: 100px;
     margin: 10px auto;
@@ -27,6 +31,8 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    text-decoration: none;
+    color: #fa6c05;
 }
 
 .price {
@@ -42,4 +48,10 @@
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.nologin {
+    width: 200px;
+    text-align: center;
+    font-size: 13px;
 }

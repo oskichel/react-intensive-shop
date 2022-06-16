@@ -4,7 +4,6 @@ import st from './Login.module.css'
 import MyInput from '../UI/Input/MyInput';
 import MyButton from '../UI/Button/MyButton';
 import { AuthContext } from '../../Context';
-import {setVisible} from '../UI/Modal/MyModal';
 
 const Login = () => {
 
@@ -15,7 +14,6 @@ const Login = () => {
     const [passwordDirty, setPasswordDirty] = useState(false);
     const [nameError, setNameError] = useState('Поле должно быть заполнено');
     const [passwordError, setPasswordError] = useState('Поле должно быть заполнено');
-    const navigate = useNavigate();
 
     const blurHandler = (e) => {
         switch (e.target.name) {
@@ -91,7 +89,6 @@ const Login = () => {
         if (loginTrue && passwordTrue && yesBlur) {
             e.preventDefault();
             setIsAuth(true);
-            navigate('/');
             console.log('auth')
         } else {
             e.preventDefault();

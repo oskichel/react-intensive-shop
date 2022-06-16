@@ -5,3 +5,12 @@
     border: 2px solid #4b2101;
     border-radius: 5px;
 }
+
+.button:hover {
+    border: 2px solid #fa6c05;
+}
+
+.button:active {
+    background-color: #fa6c05;
+    border: 2px solid #fa6c05;
+}
