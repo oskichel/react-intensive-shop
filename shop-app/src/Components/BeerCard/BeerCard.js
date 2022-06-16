@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import st from './BeerCard.module.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import MyButton from "../UI/Button/MyButton";
 import Counter from '../UI/Counter/Counter';
+import { AuthContext } from '../../Context';
 
 const BeerCard = () => {
     const { id } = useParams();
     const [beer, setBeer] = useState(null);
     const [available, setAvailable] = useState(false);
+    const {isAuth, setIsAuth} = useContext(AuthContext);
 
     useEffect(() => {
         async function fetchBeer() {
@@ -40,14 +42,21 @@ const BeerCard = () => {
                 <div>
                     {available 
                     ? 
-                    <div className={st.store}>
-                        <Counter/>
-                        <MyButton>Добавить в корзину</MyButton>
+                    <div>
+                        {isAuth ?
+                        <div className={st.store}>
+                            <Counter/>
+                            <MyButton>Добавить в корзину</MyButton>
+                        </div>
+                        :
+                        <div>Залогиньтесь, чтобы добавить товар в корзину</div>
+                        }
                     </div>
+                    
                     : 
                     <div className={st.store}><MyButton disabled>Нет в наличии</MyButton></div>}
                 </div>
-                <div></div>
+                <div>Количество товара в наличии: {beer.ebc}</div>
                 <h3>{beer.tagline}</h3>
                 <div>{beer.description}</div>
             </div>
