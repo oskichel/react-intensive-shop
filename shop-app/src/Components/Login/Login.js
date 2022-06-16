@@ -1,12 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import st from './Login.module.css'
 import MyInput from '../UI/Input/MyInput';
 import MyButton from '../UI/Button/MyButton';
 import { AuthContext } from '../../Context';
+import {setVisible} from '../UI/Modal/MyModal';
 
 const Login = () => {
 
+    const {isAuth, setIsAuth} = useContext(AuthContext);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [nameDirty, setNameDirty] = useState(false)
@@ -53,13 +55,13 @@ const Login = () => {
         setPasswordError('');
     }
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
         let yesBlur = false;
         let noError = false;
         let loginTrue = false;
         let passwordTrue = false;
 
-        if (name.length < 2) {
+        if (name.length < 1) {
             setNameError('Логин должен состоять из 2 символов и более');
             loginTrue = false;
         } else {
@@ -87,27 +89,38 @@ const Login = () => {
         }
 
         if (loginTrue && passwordTrue && yesBlur) {
+            e.preventDefault();
             setIsAuth(true);
             navigate('/');
+            console.log('auth')
         } else {
+            e.preventDefault();
+            setNameError('Введите логин');
+            setPasswordError('Введите пароль');
             setIsAuth(false);
         }
-
-
     };
 
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    useEffect(() => {
+        if (nameDirty && name.length < 1) {
+            setNameError('Логни должен быть из 2 символов и более');
+        } else {
+            setNameError('');
+        }
+    }, [nameDirty, name.length]);
 
-    const login = (e) => {
-        e.preventDefault();
-        setIsAuth(true);
-    }
-
+    useEffect(() => {
+        if (passwordDirty && password.length < 6) {
+            setPasswordError('Пароль должен быть больше 6 символов');
+        } else {
+            setPasswordError('');
+        }
+    }, [passwordDirty, password.length]);
 
     return (
         <div className={st.login}>
             <h2 className={st.login__title}>Авторизация</h2>
-            <form onSubmit={login}>
+            <form>
                 {(nameDirty && nameError) && <div className={st.error}>{nameError}</div>}
                 <MyInput 
                 className={st.input}
