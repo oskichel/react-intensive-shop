@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import st from './Header.module.css';
 import { NavLink } from "react-router-dom";
 import logo from '../Icons/logo.svg'
@@ -6,10 +6,12 @@ import MyButton from '../UI/Button/MyButton';
 import MyModal from '../UI/Modal/MyModal';
 import Login from '../Login/Login';
 import Cart from '../Cart/Cart';
+import { AuthContext } from '../../Context';
 
 function Header() {
 
     const [modal, setModal] = useState(false);
+   
 
     return (
         <div>

@@ -3,7 +3,7 @@ import st from './BeerCard.module.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import MyButton from "../UI/Button/MyButton";
-import Counter from '../Counter/Counter';
+import Counter from '../UI/Counter/Counter';
 
 const BeerCard = () => {
     const { id } = useParams();
