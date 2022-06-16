@@ -7,7 +7,7 @@ const Cart = function () {
 
     return (
         <div className={st.cart}>
-            <img src={cart_icon} className={st.icon}></img>
+            <img src={cart_icon} className={st.icon} alt={'card-icon'}></img>
             В корзине:
         </div>
     )
